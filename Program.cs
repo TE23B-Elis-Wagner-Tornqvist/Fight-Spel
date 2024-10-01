@@ -1,13 +1,13 @@
 ﻿
 using System.Diagnostics.CodeAnalysis;
 
-int HeroHP = 100;
-int VillanHP = 100;
-int runda = 1;
+int heroHp = 100;
+int villanHp = 100;
+int round = 1;
 
 Random random = new Random();
 int number = random.Next(1, 10);
-
+                                             // dessa skapar ett random nummer som jag sedan använder i multiplikation
 Random random1 = new Random();
 int number2 = random.Next(1, 10);
 
@@ -24,89 +24,89 @@ while (true)
     string mode = Console.ReadLine() ?? String.Empty;
     string character = Console.ReadLine() ?? String.Empty;
 
-      if (mode.ToLower() == "hard" && character.ToLower() == "tank")
-        {
-            HeroHP = 300;
-        }
+    if (mode.ToLower() == "hard" && character.ToLower() == "tank")
+    {
+        heroHp = 225;         // ifall man väljer "hard" svårighetsgrad och tank som gubbe så får man 300hp
+    }
 
-        if (mode.ToLower() == "hard" && character.ToLower() == "sniper")
-        {
-
-            HeroHP = 20;
-        }
-
-        if (mode.ToLower() == "hard" && character.ToLower() == "shooter")
-        {
-
-            HeroHP = 100;
-        }
-
-        if (mode.ToLower() == "normal" && character.ToLower() == "tank")
-        {
-            HeroHP = 300;
-        }
-
-        if (mode.ToLower() == "normal" && character.ToLower() == "sniper")
-        {
-
-            HeroHP = 20;
-        }
-
-        if (mode.ToLower() == "normal" && character.ToLower() == "shooter")
-        {
-
-            HeroHP = 100;
-        }
-
-         if (mode.ToLower() == "easy" && character.ToLower() == "tank")
-        {
-            HeroHP = 300;
-        }
-
-         if (mode.ToLower() == "easy" && character.ToLower() == "sniper")
-        {
-
-            HeroHP = 20;
-        }
-
-        if (mode.ToLower() == "easy" && character.ToLower() == "shooter")
-        {
-
-            HeroHP = 100;
-        }
-
-
-
-
-    while (HeroHP > 0 && VillanHP > 0)
+    if (mode.ToLower() == "hard" && character.ToLower() == "sniper")
     {
 
-      
+        heroHp = 20;  // hard och sniper = 20hp
+    }
+
+    if (mode.ToLower() == "hard" && character.ToLower() == "shooter")
+    {
+
+        heroHp = 100;      // hard och shooter = 100hp
+    }
+
+    if (mode.ToLower() == "normal" && character.ToLower() == "tank")
+    {
+        heroHp = 225;     // normal och tank = 300hp
+    }
+
+    if (mode.ToLower() == "normal" && character.ToLower() == "sniper")
+    {
+
+        heroHp = 20;
+    }
+
+    if (mode.ToLower() == "normal" && character.ToLower() == "shooter")
+    {
+
+        heroHp = 100;
+    }
+
+    if (mode.ToLower() == "easy" && character.ToLower() == "tank")
+    {
+        heroHp = 225;
+    }
+
+    if (mode.ToLower() == "easy" && character.ToLower() == "sniper")
+    {
+
+        heroHp = 20;
+    }
+
+    if (mode.ToLower() == "easy" && character.ToLower() == "shooter")
+    {
+
+        heroHp = 100;
+    }
 
 
-        Console.WriteLine($"Runda {runda}!");
+
+
+    while (heroHp > 0 && villanHp > 0)
+    {
+
+
+
+
+        Console.WriteLine($"Runda {round}!");
         if (character.ToLower() == "tank")
         {
-            tank();
+            Tank();              // ifall man väljer tank så får man properties av tank() funktionen, vilket betyder mer health mindre skada
         }
 
         if (character.ToLower() == "sniper")
         {
 
-            sniper();
+            Sniper();          // samma som på tank  fast för sniper properties
         }
 
         if (character.ToLower() == "shooter")
         {
 
-            elisDamage();
+            ElisDamage();       // samma som tank fast för shooter properties (som heter ElisDamage, dåligt namn)
         }
 
         if (mode.ToLower() == "normal")
         {
             NormalMode();
-            runda++;
-            Console.WriteLine("Tryck på enter för att börja nästa runda!");
+            round++;
+            Console.WriteLine("Tryck på enter för att börja nästa runda!");       // ifall man valde noraml så får enemy en visss health och gör en viss skada
             Console.ReadLine();
             Console.Clear();
             // special();
@@ -121,11 +121,11 @@ while (true)
         {
 
             HardMode();
-            runda++;
-            Console.WriteLine("Tryck på enter för att börja nästa runda!");
+            round++;
+            Console.WriteLine("Tryck på enter för att börja nästa runda!");  //hard = en viss enemy health och skada
             Console.ReadLine();
             Console.Clear();
-            special();
+            Special();  // hard har även en speciel funktion där det är en quix runda
 
 
         }
@@ -143,18 +143,18 @@ while (true)
         else if (mode.ToLower() == "easy")
         {
 
-                EasyMode();
-                runda++;
-                Console.WriteLine("Tryck på enter för att börja nästa runda!");
-                Console.ReadLine();
-                Console.Clear();
-                //special();
-            
+            EasyMode();
+            round++;
+            Console.WriteLine("Tryck på enter för att börja nästa runda!");    // samma som de andra, easy = en viss health och skada
+            Console.ReadLine();
+            Console.Clear();
+            //special();
+
 
         }
 
 
-        Console.WriteLine($"Hjälten har {HeroHP} HP och Skurken har {VillanHP} HP");
+        Console.WriteLine($"Hjälten har {heroHp} HP och Skurken har {villanHp} HP");
 
 
 
@@ -166,52 +166,52 @@ while (true)
     }
 
 
-    if (HeroHP <= 0 && VillanHP <= 0)
+    if (heroHp <= 0 && villanHp <= 0)
     {
 
-        Console.WriteLine("OAVGJORT");
-        slut();
+        Console.WriteLine("OAVGJORT");       // om de både har 0 eller mindre så blir det oavgjort 
+        End();                              // då sker också end funktionen vilket är en funktion där spelaren får välja om de vill köra igen
 
     }
 
-    if (HeroHP <= 0)
+    if (heroHp <= 0)
     {
 
 
         Console.WriteLine("Skurken vann!");
 
-        slut();
+        End();
 
 
     }
-    else if (VillanHP <= 0)
+    else if (villanHp <= 0)
     {
 
         Console.WriteLine("Hjälten vann!");
 
-        slut();
+        End();
 
     }
 
 
 
 
-    void tank()
+    void Tank()
     {
         Random random = new Random();
-        int Edamage = Random.Shared.Next(1, 5);
-        VillanHP -= Edamage;
-        Console.WriteLine($" Skurken skadades {Edamage} och har nu {VillanHP} kvar!");
+        int eDamage = Random.Shared.Next(1, 9);        // tanks damage
+        villanHp -= eDamage;
+        Console.WriteLine($" Skurken skadades {eDamage} och har nu {villanHp} kvar!");
 
     }
 
-    void sniper()
+    void Sniper()
     {
 
         Random random = new Random();
-        int Edamage = Random.Shared.Next(20, 50);
-        VillanHP -= Edamage;
-        Console.WriteLine($" Skurken skadades {Edamage} och har nu {VillanHP} kvar!");
+        int eDamage = Random.Shared.Next(20, 50);       //snipers damage
+        villanHp -= eDamage;
+        Console.WriteLine($" Skurken skadades {eDamage} och har nu {villanHp} kvar!");
 
 
 
@@ -221,13 +221,24 @@ while (true)
 
 
 
-    void elisDamage()
+    void ElisDamage()
     {
 
         Random random = new Random();
-        int Edamage = Random.Shared.Next(1, 15);
-        VillanHP -= Edamage;
-        Console.WriteLine($" Skurken skadades {Edamage} och har nu {VillanHP} kvar!");
+        int eDamage = Random.Shared.Next(1, 15);   //shooters damagge
+        villanHp -= eDamage;
+        Console.WriteLine($" Skurken skadades {eDamage} och har nu {villanHp} kvar!");
+
+    }
+
+    void Assasin() {
+
+        
+        Random random = new Random();
+        int eDamage = Random.Shared.Next(1, 5);   //assasin damage
+        villanHp -= eDamage;
+        Console.WriteLine($" Skurken skadades {eDamage} och har nu {villanHp} kvar!");  // han inte använda denna tyvärr
+
 
     }
 
@@ -235,9 +246,9 @@ while (true)
     {
 
         Random random = new Random();
-        int Tdamage = Random.Shared.Next(1, 15);
-        HeroHP -= Tdamage;
-        Console.WriteLine($" Hjälten skadades {Tdamage} och har nu {HeroHP} kvar!");
+        int tDamage = Random.Shared.Next(1, 15); // hur mycket skada enemy gör
+        heroHp -= tDamage;
+        Console.WriteLine($" Hjälten skadades {tDamage} och har nu {heroHp} kvar!");
 
     }
 
@@ -246,9 +257,9 @@ while (true)
     {
 
         Random random2 = new Random();
-        int Hskurk = Random.Shared.Next(10, 30);
-        HeroHP -= Hskurk;
-        Console.WriteLine($" Hjälten skadades {Hskurk} och har nu {HeroHP} kvar!");
+        int hVillan = Random.Shared.Next(10, 30);      // enemty skada
+        heroHp -= hVillan;
+        Console.WriteLine($" Hjälten skadades {hVillan} och har nu {heroHp} kvar!");
     }
 
 
@@ -256,54 +267,54 @@ while (true)
     {
 
         Random random3 = new Random();
-        int Eskurk = Random.Shared.Next(1, 8);
-        HeroHP -= Eskurk;
-        Console.WriteLine($" Hjälten skadades {Eskurk} och har nu {HeroHP} kvar!");
+        int hVillan = Random.Shared.Next(1, 8);  // enemy skada
+        heroHp -= hVillan;
+        Console.WriteLine($" Hjälten skadades {hVillan} och har nu {heroHp} kvar!");
     }
 
-    void slut()
+    void End()
     {
 
         Console.WriteLine("Vill du spela igen?");
-        string svar = Console.ReadLine() ?? string.Empty;
-        if (svar.ToLower() == "ja")
+        string answer = Console.ReadLine() ?? string.Empty;
+        if (answer.ToLower() == "ja")
         {
 
-            HeroHP = 100;
-            VillanHP = 100;
-            runda = 1;
+            heroHp = 100;
+            villanHp = 100;      // en funktion där spelaren får välja att börja om eller inte. Om spelaren säger ja så resetas alla hp samt rounds
+            round = 1;
 
 
         }
-        else if (svar.ToLower() == "nej")
+        else if (answer.ToLower() == "nej")
         {
 
-            Console.WriteLine("Synd! Du måste!");
+            Console.WriteLine("Synd! Du måste!");    // om de säger nej så måste de ändå spela om
 
         }
 
     }
 
-    void special()
+    void Special()
     {
-
-        if (runda == 4)
+  // en special funktion med en quiz runda där spelaren för ett random tal * tal
+        if (round == 4)
         {
 
             Console.WriteLine("SPECIAL QUIZ ROUND!");
             Console.WriteLine($"Vad är {number} * {number2}?");
 
-            string svar = Console.ReadLine() ?? string.Empty;
+            string answer = Console.ReadLine() ?? string.Empty;
 
-            if (svar == (number * number2).ToString())
+            if (answer == (number * number2).ToString())       // tar random int från början och gångrar med varandra och gör den till en string som läses av, om spelaren har svarat nummer * nummer så är det rätt
             {
-                VillanHP -= 25;
-                Console.WriteLine("Rätt svar! Skurken tog 25 CRITICAL HIT!");
+                villanHp -= 25;
+                Console.WriteLine("Rätt svar! Skurken tog 25 CRITICAL HIT!");       // om de svarar rätt så tar villan -25hp
             }
             else
             {
-                HeroHP -= 25;
-                Console.WriteLine("Fel svar! Du tar -25 CRITICAL HIT!");
+                heroHp -= 25;
+                Console.WriteLine("Fel svar! Du tar -25 CRITICAL HIT!");  // om de svarar fel tar hero - 25hp
             }
 
         }
